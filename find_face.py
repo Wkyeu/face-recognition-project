@@ -12,3 +12,11 @@ results = DeepFace.find(
 )
 
 print(results)
+
+#to grab the top match 
+df = results[0]
+if len(df) > 0:
+    best_match = df.iloc[0]
+    print(f"Best match: {best_match['identity']} (distance: {best_match['distance']:.3f})")
+else: 
+    print("No match found in database")

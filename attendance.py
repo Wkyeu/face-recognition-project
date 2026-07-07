@@ -23,3 +23,11 @@ def already_logged_recently(name):
         return False
     elapsed = (datetime.now() - last_seen[name]).total_seconds() / 60
     return elapsed < COOLDOWN_MINUTES
+
+def log_attendance(name):
+    now = datetime.now()
+    with open(LOG_FILE, mode="a", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow([name, now.strftime("%Y-%m-%d %H:%M:%S")])
+    last_seen[name] = now
+    print(f"Logged: {name} at {now.strftime('%H:%M:%S')}")

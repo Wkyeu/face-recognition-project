@@ -19,4 +19,7 @@ DETECTOR_BACKEND = "opencv"
 
 os.makedirs(DB_PATH, exist_ok=True) #creates database folder if it does not already exist
 
-
+if not os.path.exists(LOG_FILE):
+    with open(LOG_FILE, mode="w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["Name", "Timestamp"])

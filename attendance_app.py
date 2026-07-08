@@ -16,3 +16,7 @@ LOG_FILE = "attendance_log.csv"
 COOLDOWN_MINUTES = 10
 MODEL_NAME = "VGG-Face"
 DETECTOR_BACKEND = "opencv"
+
+os.makedirs(DB_PATH, exist_ok=True) #creates database folder if it does not already exist
+
+

@@ -47,21 +47,27 @@ while True:
     cv2.imshow("Attendance Camera", frame) #imageshow --- "Attendance Camera": String, name given to the popup window on the top left title bar, frame: Image array, grid of pixels
 
     if frame_count % CHECK_INTERVAL == 0:
-        results = DeepFace.find(
-            img_path=frame,
-            db_path=DB_PATH,
-            model_name="VGG-Face",
-            detector_backend="opencv",
-            enforce_detection=False,
-            silent=True #supress deepface logging messages
-        )
+        try:
+            results = DeepFace.find(
+                img_path=frame,
+                db_path=DB_PATH,
+                model_name="VGG-Face",
+                detector_backend="opencv",
+                enforce_detection=False,
+                silent=True #supress deepface logging messages
+            )
 
-        for df in results:
-            if len(df) > 0:
-                best_match = df.iloc[0] #integer location: grab the first row of dataframe
-                if best_match["distance"] < 0.4: 
-                    name = os.path.basename(best_match["identity"])
-                    if not already_logged_recently(name):
-                        log_attendance(name)
+            for df in results:
+                if len(df) > 0:
+                    best_match = df.iloc[0] #integer location: grab the first row of dataframe
+                    if best_match["distance"] < 0.4: 
+                        name = os.path.basename(best_match["identity"])
+                        if not already_logged_recently(name):
+                            log_attendance(name)
+        
+        except Exception as e:
+            print(f"Recognition skipped this frame: {e}")
+        
+    
 
 

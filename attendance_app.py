@@ -11,3 +11,8 @@ import pandas as pd #displa/sort csv as a proper table
 import streamlit as st 
 from deepface import DeepFace 
 
+DB_PATH = "database"
+LOG_FILE = "attendance_log.csv"
+COOLDOWN_MINUTES = 10
+MODEL_NAME = "VGG-Face"
+DETECTOR_BACKEND = "opencv"

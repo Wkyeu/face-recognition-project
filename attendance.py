@@ -37,4 +37,9 @@ frame_count = 0
 
 print("Starting attendance system..... press 'q' to quit")
 
+while True:
+    ret, frame = cap.read() #return a tuple with 2 var, ret: Boolean to check if webcam is working properly, frame: 3D array containing raw pixel data
+    if not ret:
+        break 
 
+    

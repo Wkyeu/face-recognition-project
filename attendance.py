@@ -60,10 +60,14 @@ while True:
             for df in results:
                 if len(df) > 0:
                     best_match = df.iloc[0] #integer location: grab the first row of dataframe
+                    print(f"Closest match: {best_match['identity']} - distance: {best_match['distance']:.3f}")
                     if best_match["distance"] < 0.4: 
                         name = os.path.basename(best_match["identity"])
                         if not already_logged_recently(name):
                             log_attendance(name)
+                    
+                    else:
+                        print("No match found")
         
         except Exception as e:
             print(f"Recognition skipped this frame: {e}")

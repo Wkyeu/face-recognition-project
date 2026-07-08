@@ -68,6 +68,9 @@ while True:
         except Exception as e:
             print(f"Recognition skipped this frame: {e}")
         
+    if cv2.waitKey(1) & 0xFF == ord('q'): #.waitKey(1) tells python to pause for 1 millisecond and detect keystroke, 0xFF==ord('q') checks if q key is pressed to break
+        break 
+    
     
 
 

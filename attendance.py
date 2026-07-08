@@ -61,7 +61,7 @@ while True:
                 if len(df) > 0:
                     best_match = df.iloc[0] #integer location: grab the first row of dataframe
                     print(f"Closest match: {best_match['identity']} - distance: {best_match['distance']:.3f}")
-                    if best_match["distance"] < 0.4: 
+                    if best_match["distance"] < 0.68: 
                         name = os.path.basename(best_match["identity"])
                         if not already_logged_recently(name):
                             log_attendance(name)

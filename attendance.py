@@ -9,6 +9,7 @@ from deepface import DeepFace
 DB_PATH = "database"
 LOG_FILE = "attendance_log.csv"
 COOLDOWN_MINUTES = 10
+CHECK_INTERVAL = 60
 
 #Create the CSV with headers if it does not exist yet
 if not os.path.exists(LOG_FILE):
@@ -41,5 +42,26 @@ while True:
     ret, frame = cap.read() #return a tuple with 2 var, ret: Boolean to check if webcam is working properly, frame: 3D array containing raw pixel data
     if not ret:
         break 
-
     
+    frame_count += 1
+    cv2.imshow("Attendance Camera", frame) #imageshow --- "Attendance Camera": String, name given to the popup window on the top left title bar, frame: Image array, grid of pixels
+
+    if frame_count % CHECK_INTERVAL == 0:
+        results = DeepFace.find(
+            img_path=frame,
+            db_path=DB_PATH,
+            model_name="VGG-Face",
+            detector_backend="opencv",
+            enforce_detection=False,
+            silent=True #supress deepface logging messages
+        )
+
+        for df in results:
+            if len(df) > 0:
+                best_match = df.iloc[0] #integer location: grab the first row of dataframe
+                if best_match["distance"] < 0.4: 
+                    name = os.path.basename(best_match["identity"])
+                    if not already_logged_recently(name):
+                        log_attendance(name)
+
+

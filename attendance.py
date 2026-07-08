@@ -70,7 +70,9 @@ while True:
         
     if cv2.waitKey(1) & 0xFF == ord('q'): #.waitKey(1) tells python to pause for 1 millisecond and detect keystroke, 0xFF==ord('q') checks if q key is pressed to break
         break 
-    
-    
+
+#cleanup 
+cap.release() #webcam stays on in the background otherwise
+cv2.destroyAllWindows() #imshow() popup window remains frozen and open otherwise
 
 

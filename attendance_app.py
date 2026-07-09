@@ -57,5 +57,8 @@ st.set_page_config(page_title="Face Attendance", page_icon="🧑‍💻", layout
 #sets a heading at the top of page (Note: different from page_title in set_page_config as that is for the tab title)
 st.title("🧑‍💻 Face Recognition Attendance")
 
+#st.tabs() creates clickable tabs on top of the page
+tab_checkin, tab_database, tab_log = st.tabs(["Check In", "Manage Database", "Attendance Log"])
+
 
 

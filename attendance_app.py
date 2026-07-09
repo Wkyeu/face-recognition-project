@@ -42,4 +42,9 @@ def log_attendance(name):
     with open(LOG_FILE, mode="a", newline="") as f:
         writer = csv.writer(f)
         writer.writerow([name, now.strftime("%Y-%m-%d %H:%M:%S")])
-        
+
+#used to delete any .pkl files (from deepface caching embeddings) so deepface have to rebuild it the next time
+def rebuild_cache_if_needed():
+    for f in os.listdir(DB_PATH):
+        if f.endswith(".pkl"):
+            os.remove(os.path.join(DB_PATH, f))

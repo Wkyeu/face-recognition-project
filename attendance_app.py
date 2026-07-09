@@ -60,5 +60,11 @@ st.title("🧑‍💻 Face Recognition Attendance")
 #st.tabs() creates clickable tabs on top of the page
 tab_checkin, tab_database, tab_log = st.tabs(["Check In", "Manage Database", "Attendance Log"])
 
+with tab_checkin: #with block means everything intended under here gets drawn inside the Check in tab specifically
+    st.write("Take a snapshot to check in.")
+    snapshot = st.camera_input("Look at the camera and take a photo")
 
-
+    if snapshot is not None:
+        #bytearray(snapshot.read()) reads the raw bytes out of the uploaded file, np.asarray(..., dtype=np.uint8) turns those bytes into a numpy array
+        file_bytes = np.asarray(bytearray(snapshot.read()), dtype=np.uint8) #snapshot from streamlit is raw image file bytes (like a .jpg file)
+        frame = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR) #cv2.imdecode() decodes the compressed jpg data into a pixel grid

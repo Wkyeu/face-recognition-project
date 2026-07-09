@@ -48,3 +48,14 @@ def rebuild_cache_if_needed():
     for f in os.listdir(DB_PATH):
         if f.endswith(".pkl"):
             os.remove(os.path.join(DB_PATH, f))
+
+#-------------------Page Setup-----------------------------
+
+#sets basic page metadata
+st.set_page_config(page_title="Face Attendance", page_icon="🧑‍💻", layout="centered")
+
+#sets a heading at the top of page (Note: different from page_title in set_page_config as that is for the tab title)
+st.title("🧑‍💻 Face Recognition Attendance")
+
+
+

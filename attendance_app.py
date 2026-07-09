@@ -89,7 +89,15 @@ with tab_checkin: #with block means everything intended under here gets drawn in
                 best_match = df.iloc[0]
                 if best_match["distance"] < best_match["threshold"]:
                     name = os.path.splitext(os.path.basename(best_match["identity"]))[0] #os.path.splitext(...)[0] strips the .jpg extension off the filename, so instead of displaying "elon_musk.jpg" to the user, it shows just "elon_musk"
-
+                    log_df = load_log_df()
+                    if already_logged_recently(name, log_df):
+                        st.info(f"👋 {name} was already checked in within the last {COOLDOWN_MINUTES} minutes") #st.info() blue box (neutral information, tips etc)
+                    else:
+                        log_attendance(name)
+                        st.success(f"Welcome, {name}! Attendance logged.") #st.success(): green coloured box (completed task)
+                    matched = True
+        if not matched:
+            st.warning("No confident match found. Try again with better lighting, or add yourself into the database")
 
 
 

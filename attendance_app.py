@@ -36,3 +36,10 @@ def already_logged_recently(name, log_df):
     last_time = pd.to_datetime(matches["Timestamp"]).max() #.max() grabs the most recent timestamp if there are multiple past entries of the same name
     elapsed = (datetime.now() - last_time).total_seconds() / 60
     return elapsed < COOLDOWN_MINUTES
+
+def log_attendance(name):
+    now = datetime.now()
+    with open(LOG_FILE, mode="a", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow([name, now.strftime("%Y-%m-%d %H:%M:%S")])
+        

@@ -68,3 +68,29 @@ with tab_checkin: #with block means everything intended under here gets drawn in
         #bytearray(snapshot.read()) reads the raw bytes out of the uploaded file, np.asarray(..., dtype=np.uint8) turns those bytes into a numpy array
         file_bytes = np.asarray(bytearray(snapshot.read()), dtype=np.uint8) #snapshot from streamlit is raw image file bytes (like a .jpg file)
         frame = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR) #cv2.imdecode() decodes the compressed jpg data into a pixel grid
+        
+        with st.spinner("Recognising face"): #st.spinner() shows a loading indicator
+            try:
+                results = DeepFace.find(
+                    img_path=frame,
+                    db_path=DB_PATH,
+                    model_name=MODEL_NAME,
+                    detector_backend=DETECTOR_BACKEND,
+                    enforce_detection=False,
+                    silent=True,
+                )
+            except Exception as e:
+                results = []
+                st.error(f"Recognition failed: {e}")
+
+        matched = False
+        for df in results:
+            if len(df) > 0:
+                best_match = df.iloc[0]
+                if best_match["distance"] < best_match["threshold"]:
+                    name = os.path.splitext(os.path.basename(best_match["identity"]))[0] #os.path.splitext(...)[0] strips the .jpg extension off the filename, so instead of displaying "elon_musk.jpg" to the user, it shows just "elon_musk"
+
+
+
+
+

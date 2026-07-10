@@ -124,6 +124,16 @@ with tab_database:
             rebuild_cache_if_needed()
             st.success(f"Added '{safe_name}' to the database")
 
+    st.divider()
+
+    st.write("**Current database:**")
+    people = [f for f in os.listdir(DB_PATH) if f.lower().endswith((".jpg", ".jpeg", ".png"))]
+
+    if people:
+        cols = st.columns(4) #splits the page horizontally into 4 equal side by side secitons (like a table row)
+        for i, person_file in enumerate(people): #enumerate(people) gives us both index number(i) and the filename we loop (person_file)
+            with cols[i % 4]: #cols[i % 4] is how we cycle through the 4 columns repeatedly, so person 0 goes into column 0, person 4 goes back in column 0 again
+                st.image(os.path.join(DB_PATH, person_file), caption=os.path.splitext(person_file)[0], width=120) #st.image() displays an image file direcyly in the page, pass it a file path, a caption, and a pixel width
 
 
 

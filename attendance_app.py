@@ -147,4 +147,8 @@ with tab_database:
 
 with tab_log:
     st.write("**Attendance History:**")
+    log_df = load_log_df()
+    if len(log_df) > 0:
+        st.dataframe(log_df.sort_values("Timestamp", ascending=False), use_container_width=True) #st.dataframe() renders a pandas dataframe as an interactive table(scrollable, clickable), use_container_width=True makes the table stretch to fill the available width
+
 

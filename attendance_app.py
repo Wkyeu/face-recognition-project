@@ -157,5 +157,6 @@ with tab_log:
             file_name="attendance_log.csv",
             mime="text/csv"
         )
-    
+    else:
+        st.caption("Seems like no attendance recorded yet")
 

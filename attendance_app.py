@@ -135,5 +135,12 @@ with tab_database:
             with cols[i % 4]: #cols[i % 4] is how we cycle through the 4 columns repeatedly, so person 0 goes into column 0, person 4 goes back in column 0 again
                 st.image(os.path.join(DB_PATH, person_file), caption=os.path.splitext(person_file)[0], width=120) #st.image() displays an image file direcyly in the page, pass it a file path, a caption, and a pixel width
 
+                if st.button("Remove", key=f"remove_{person_file}"):
+                    os.remove(os.path.join(DB_PATH, person_file))
+                    rebuild_cache_if_needed()
+                    st.rerun() #st.rerun() forces Streamlit to restart the script from the top, used here soi the just-deleted photo disappears from view instantly
+    
+    else:
+        st.caption("No one in the database yet.")
 
 

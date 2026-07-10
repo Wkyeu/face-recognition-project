@@ -153,7 +153,7 @@ with tab_log:
 
         st.download_button(
             "Download log as CSV",
-            data=log_df.to_csv(),
+            data=log_df.to_csv(index=False), #index=False means dont include pandas' internal row numbering column in the output
             file_name="attendance_log.csv",
             mime="text/csv"
         )

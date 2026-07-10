@@ -143,4 +143,8 @@ with tab_database:
     else:
         st.caption("No one in the database yet.")
 
+#-------------------Attendance Log-------------------------
+
+with tab_log:
+    st.write("**Attendance History:**")
 

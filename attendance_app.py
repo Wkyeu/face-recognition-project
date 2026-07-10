@@ -97,7 +97,15 @@ with tab_checkin: #with block means everything intended under here gets drawn in
                         st.success(f"Welcome, {name}! Attendance logged.") #st.success(): green coloured box (completed task)
                     matched = True
         if not matched:
-            st.warning("No confident match found. Try again with better lighting, or add yourself into the database")
+            st.warning("No confident match found. Try again with better lighting, or add yourself into the database") #st.warning(): yellow box (shows warning -- duh)
+
+#--------------Database tab-------------------------------------
+
+with tab_database:
+    st.write("Add a new person to the recognition database")
+
+    #handling name input
+    new_name = st.text_input("Person's name (used as their ID, e.g. 'john_doe')") #st.text_input renders a text box on the page, and the content user types get stored in new_name
 
 
 

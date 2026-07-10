@@ -110,7 +110,19 @@ with tab_database:
     #handling photo input
     new_photo = st.file_uploader("Upload a clear, front_facing photo", type=["jpg", "jpeg", "png"]) #st.file_uploader renders a drag and drop/browse file picker. type=[...] argument restricts the file types that are selectable
 
-    
+    if st.button("Add to database"):
+        if not new_name.strip():
+            st.error("Please enter a name")
+        elif new_photo is None:
+            st.error("Please upload a photo")
+        else:
+            safe_name = new_name.strip().replace(" ", "_")
+            save_path = os.path.join(DB_PATH, f"{safe_name}.jpg")
+
+            with open(save_path, "wb") as f:
+                f.write(new_photo.getbuffer()) #new_photo.getbuffer() grabs the raw uploaded file's bytes, then it is writtern straight into the new .jpg file (sort of like dragging a photo into the database/ folder)
+            rebuild_cache_if_needed()
+            st.success(f"Added '{safe_name}' to the database")
 
 
 

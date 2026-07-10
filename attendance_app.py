@@ -151,4 +151,11 @@ with tab_log:
     if len(log_df) > 0:
         st.dataframe(log_df.sort_values("Timestamp", ascending=False), use_container_width=True) #st.dataframe() renders a pandas dataframe as an interactive table(scrollable, clickable), use_container_width=True makes the table stretch to fill the available width
 
+        st.download_button(
+            "Download log as CSV",
+            data=log_df.to_csv(),
+            file_name="attendance_log.csv",
+            mime="text/csv"
+        )
+    
 

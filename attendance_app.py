@@ -107,6 +107,11 @@ with tab_database:
     #handling name input
     new_name = st.text_input("Person's name (used as their ID, e.g. 'john_doe')") #st.text_input renders a text box on the page, and the content user types get stored in new_name
 
+    #handling photo input
+    new_photo = st.file_uploader("Upload a clear, front_facing photo", type=["jpg", "jpeg", "png"]) #st.file_uploader renders a drag and drop/browse file picker. type=[...] argument restricts the file types that are selectable
+
+    
+
 
 
 
